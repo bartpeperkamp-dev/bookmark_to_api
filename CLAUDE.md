@@ -12,7 +12,7 @@ There is no build or test command. To try changes, load the extension into Firef
 
 1. Open `about:debugging#/runtime/this-firefox` in Firefox.
 2. Click **Load Temporary Add-on…**
-3. Select `manifest.json` (for live iteration) or the packaged `bookmark-it.xpi`.
+3. Select `manifest.json` (for live iteration) or the packaged `bookmark-to-api.xpi`.
 
 To exercise the settings page: `about:addons` → **Bookmark it!** → **⋯** → **Preferences**.
 
@@ -25,7 +25,7 @@ There is no GUI input-automation tool (`xdotool`/`ydotool`/`web-ext`) available 
 
 ## Packaging the .xpi
 
-`zip` is not installed in this environment. Rebuild `bookmark-it.xpi` with Python's `zipfile` instead, explicitly listing the files to include (avoids picking up stray files):
+`zip` is not installed in this environment. Rebuild `bookmark-to-api.xpi` with Python's `zipfile` instead, explicitly listing the files to include (avoids picking up stray files):
 
 ```python
 import zipfile
@@ -33,7 +33,7 @@ files = [
     "manifest.json", "background.js", "options.html", "options.js",
     "icons/book-icon.png", "icons/book-icon-32x32.png", "icons/LICENSE",
 ]
-with zipfile.ZipFile("bookmark-it.xpi", "w", zipfile.ZIP_DEFLATED) as z:
+with zipfile.ZipFile("bookmark-to-api.xpi", "w", zipfile.ZIP_DEFLATED) as z:
     for f in files:
         z.write(f)
 ```
@@ -54,4 +54,4 @@ Regenerate the xpi whenever `manifest.json`, `background.js`, `options.html`, `o
 
 ## Icons
 
-`icons/` holds `book-icon.png` (browser action toolbar icon) and `book-icon-32x32.png` (extension icon, referenced from `manifest.json`'s `icons` key). `icons/LICENSE` covers their licensing — check it before adding/replacing icons.
+`icons/` holds `book-icon.png` (browser action toolbar icon) and `book-icon-32x32.png` (extension icon, referenced from `manifest.json`'s `icons` key).
